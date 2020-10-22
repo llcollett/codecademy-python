@@ -71,19 +71,23 @@ computer_00s_count = computer_00s.question.nunique()
 
 # build a game
 def jeopardy_game(df = jeopardy):
+	y_or_n = 'y'
 	correct = 0
 	incorrect = 0
-	random_index = random.randint(0, len(df))
-	question = df.question.iloc[random_index]
-	answer = df.answer.iloc[random_index]
-	print(question)
-	user_input = input('Give it your best shot: ')
-	if (user_input.lower() == answer.lower()):
-		print('Well done!')
-		correct += 1
-	else: 
-		print('Bad luck')
-		incorrect += 1
-	return 'You scored: ' + str(score)
+	while (y_or_n.lower() == 'y'):
+		random_index = random.randint(0, len(df))
+		question = df.question.iloc[random_index]
+		answer = df.answer.iloc[random_index]
+		print(question)
+		user_input = input('Give it your best shot: ')
+		if (user_input.lower() == answer.lower()):
+			print('Well done!')
+			correct += 1
+			y_or_n = input('Do you want to play again? y or n: ')
+		else: 
+			print('Bad luck, the answer is ' + answer)
+			incorrect += 1
+			y_or_n = input('Do you want to play again? y or n: ')
+	print('You scored: ' + str(correct) + ' correct answers and ' + str(incorrect) + ' incorrect answers')
 
 jeopardy_game()
