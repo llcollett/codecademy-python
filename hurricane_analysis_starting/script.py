@@ -40,14 +40,26 @@ def construct_hurricane_dictionary(names, months, years, max_sustained_winds, ar
 		hurricane_dict[names[i]] = name_dict
 	return hurricane_dict
 
-hurricane_dictionary = construct_hurricane_dictionary(names, months, years, max_sustained_winds, areas_affected, deaths)
-print(hurricane_dictionary)
-
-
+hurricanes = construct_hurricane_dictionary(names, months, years, max_sustained_winds, areas_affected, deaths)
 
 # write your construct hurricane by year dictionary function here:
+def hurricane_by_year(hurricanes):
+	# new dictionary
+	year_dict = {}
+	# for every hurricane
+	for key, value in hurricanes.items():
+		current_year = value["Year"]
+		current_hurricane = {key: value}
+		year_dict[current_year] = []
+		# if doesn't exist already add year
+		if (current_year not in year_dict):
+			year_dict[current_year] = [current_hurricane]
+		else:
+			year_dict[current_year].append(current_hurricane)
+	# return new dictionary
+	return year_dict
 
-
+print(hurricane_by_year(hurricanes))
 
 
 
